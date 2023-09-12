@@ -1,0 +1,55 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: "awsblog-loadtest-workload-compute"
+  version: "1.25"
+  region: "us-west-2"
+
+managedNodeGroups:
+  - name: mng-addon
+    labels:
+      position: addon
+    instanceType: c5.4xlarge
+    # ami: ami-00ac65b35574d3709
+    amiFamily: AmazonLinux2
+    # overrideBootstrapCommand: |
+    #   #!/bin/bash
+    #   sudo yum install -y amazon-ssm-agent
+    minSize: 1
+    maxSize: 30
+    desiredCapacity: 1
+    volumeSize: 20
+    privateNetworking: true
+    tags:
+      nodegroup-role: addon
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        externalDNS: true
+        certManager: true
+        albIngress: true
+        cloudWatch: true        
+
+  - name: "mng-workload-compute"
+    labels:
+      position: "workload-compute"
+    instanceType: c5.4xlarge
+    # ami: ami-00ac65b35574d3709
+    amiFamily: AmazonLinux2
+    # overrideBootstrapCommand: |
+    #   #!/bin/bash
+    #   sudo yum install -y amazon-ssm-agent
+    minSize: 3
+    maxSize: 30
+    desiredCapacity: 3
+    volumeSize: 20
+    privateNetworking: true
+    tags:
+      nodegroup-role: "workload-compute"
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        externalDNS: true
+        certManager: true
+        albIngress: true
+        cloudWatch: true        

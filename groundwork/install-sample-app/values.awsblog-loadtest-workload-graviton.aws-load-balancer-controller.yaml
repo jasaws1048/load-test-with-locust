@@ -1,0 +1,15 @@
+# Default values for 'aws-load-balancer-controller'
+clusterName: "awsblog-loadtest-workload-graviton"
+region: "us-west-2"
+vpcId: "vpc-029bf0fa88f80e16b"
+
+# IRSA
+serviceAccount:
+  create: false
+  name: "aws-load-balancer-controller"
+
+# Deploy at Node matching Labels for 'aws-load-balancer-controller'
+nodeSelector:
+  position: "addon"
+
+tolerations: []

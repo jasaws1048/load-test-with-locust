@@ -1,0 +1,20 @@
+# Default values for 'cluster-autoscaler'
+cloudProvider: "aws"
+awsRegion: "us-west-2"
+
+# Scope all Auto Scaling group in cluster
+autoDiscovery:
+  clusterName: "awsblog-loadtest-workload-graviton"
+
+# IRSA
+rbac:
+  serviceAccount:
+    create: false
+    name: "cluster-autoscaler"
+    eks.amazonaws.com/role-arn: "arn:aws:iam::659177394890:role/awsblog-loadtest-workload-graviton-cluster-autoscaler"
+
+# Deploy at Node matching Labels for 'cluster-autoscaler'
+nodeSelector:
+  position: "addon"
+
+tolerations: []

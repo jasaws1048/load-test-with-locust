@@ -1,0 +1,15 @@
+# Default values for 'aws-load-balancer-controller'
+clusterName: "awsblog-loadtest-locust"
+region: "us-west-2"
+vpcId: "vpc-025883333c85ecf4b"
+
+# IRSA
+serviceAccount:
+  create: false
+  name: "aws-load-balancer-controller"
+
+# Deploy at Node matching Labels for 'aws-load-balancer-controller'
+nodeSelector:
+  position: "addon"
+
+tolerations: []
