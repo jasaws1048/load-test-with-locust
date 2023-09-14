@@ -1,8 +1,6 @@
-# Load testing your workload running on Amazon EKS with Locust
+# Performance Comparsion with Load test
 
-This repository contains example code for creating EKS clusters and installing necessary addons such as [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) and [AWS Load Balancer Controller](https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller) and [Locust](https://github.com/deliveryhero/helm-charts/tree/master/stable/locust).
-
-In addition, it provides sample application to be used for testing. Please feel free to replace it with your own application.
+One EKS cluster is setup with graviton C6g.4xlarge instance type and another EKS cluster is setup with C5.4xlarge instance type and there were applications hosted on these EKS cluster to do the load test. Another EKS cluster is setup to host locust application to swarm the load on the applications hosted by the other two EKS Cluster. Below are detailed steps to setup the environment. 
 
 For full details about using Locust, please see the [Locust official documentation](http://docs.locust.io/en/stable/).
 
@@ -74,8 +72,9 @@ Install CLI tools and settings.
 
 If you already have clusters, you can skip this steps.
 
-- [Create Locust Cluster](./groundwork/eks-clusters#create-locust-cluster)
-- [Create Workload Cluster](./groundwork/eks-clusters#create-workload-cluster) (option)
+- [Create Locust Cluster](./groundwork/eks-clusters/awsblog-loadtest-locust.yaml)
+- [Create Graviton Cluster](./groundwork/eks-clusters/awsblog-loadtest-workload-graviton.yaml)
+- [Create Compute Cluster](./groundwork/eks-clusters/awsblog-loadtest-compute.yaml)
 
 Please check your AWS Account limits to ensure you can provision 2 VPCs, so if you do not have enough resources in your environment, the above cluster creation will fail.
 
